@@ -1,0 +1,5 @@
+[tool.ruff]
+# Ignoramos RUF012 porque Django y DRF usan atributos de clase mutables por diseño (fields, permission_classes, etc.)
+lint.ignore = ["RUF012"]
+
+# mirar versiones django y python y puede que entonces no haga falta ignorar los conflictos de ruff
