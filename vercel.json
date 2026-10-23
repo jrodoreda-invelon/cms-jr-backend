@@ -3,10 +3,6 @@
     {
       "src": "config/wsgi.py",
       "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "installCommand": "uv pip install -r requirements.txt"
-      }
     }
   ],
   "routes": [
