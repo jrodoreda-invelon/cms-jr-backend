@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "2160cbde-b7d0-45ed-91fc-b43190fbd30b",
+		"name": "CMS Jr - Producción",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "58945052",
+		"_collection_link": "https://jrodoreda-5621515.postman.co/workspace/99b4649f-d9b0-4c1d-8d55-8efa0926ec31/collection/58945052-2160cbde-b7d0-45ed-91fc-b43190fbd30b?action=share&source=collection_link&creator=58945052"
+	},
+	"item": [
+		{
+			"name": "listar con token → 200",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 6036adae123c7d197010aa47eb686ec3833b6dc3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/projects/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"projects",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
