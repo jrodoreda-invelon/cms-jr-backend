@@ -88,6 +88,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         conn_max_age=600,
+        #Hacemos que SSL sea obligatorio en producción pero no en el CI, p'orque es un Postgres temporal dentro de
+        # GitHub Actions, y ese contenedor no tiene SSL
         ssl_require=os.environ.get('DB_SSL_REQUIRE', 'True') == 'True',
         env='DATABASE_URL'
     )
