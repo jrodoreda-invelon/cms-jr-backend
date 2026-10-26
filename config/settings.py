@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-import dj_database_url
 
+import dj_database_url
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -88,7 +88,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         conn_max_age=600,
-        ssl_require=True,
+        #Hacemos que SSL sea obligatorio en producción pero no en el CI, p'orque es un Postgres temporal dentro de
+        # GitHub Actions, y ese contenedor no tiene SSL
+        ssl_require=os.environ.get('DB_SSL_REQUIRE', 'True') == 'True',
         env='DATABASE_URL'
     )
 }
