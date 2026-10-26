@@ -7,6 +7,26 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ci -d ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+      DB_SSL_REQUIRE: "False"
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -16,15 +36,17 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
       - name: Install dependencies
-        run: |
-          python -m uv install --upgrade uv
-          pip install -r requirements.txt
+        run: uv pip install --system -r requirements.txt
 
       - name: Run Ruff Linter
-        run: |
-          ruff check .
+        run: ruff check .
+
+      - name: Check database engine
+        run: python manage.py shell -c "from django.db import connection; print(connection.vendor)"
 
       - name: Run Django Tests
-        run: |
-          python manage.py test
+        run: python manage.py test

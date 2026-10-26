@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         conn_max_age=600,
-        ssl_require=True,
+        ssl_require=os.environ.get('DB_SSL_REQUIRE', 'True') == 'True',
         env='DATABASE_URL'
     )
 }
